@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import Question from './types/types';
 import formatQuestion from './utils/formatQuestion';
+import DarkLightModeToggle from './components/DarkLightModeToggle';
+import Choice from './components/Choice';
 
 const baseUrl = 'http://localhost:3001/question';
 
 function App() {
   const [question, setQuestion] = useState<Question>();
   const [categories, setCategories] = useState<string[]>();
-  console.log(question);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDropped, setIsDropped] = useState(false);
 
   useEffect(() => {
     fetchRandomQuestion();
@@ -21,16 +24,23 @@ function App() {
       setQuestion(formattedQuestion);
     }
   };
+
   return (
-    <div style={{ margin: '0rem' }}>
-      <p>{question?.question.text}</p>
-      <ul>
-        {question?.possibleAnswers.map((choice) => (
-          <li style={{ listStyle: 'square' }}>{choice.text}</li>
-        ))}
-      </ul>
-      hello
-    </div>
+    <>
+      <DarkLightModeToggle
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+      />
+      <div className={`main-container ${isDarkMode ? '' : 'light-mode'}`}>
+        <h2 className="question">{question?.question.text}</h2>
+
+        <ul className="choice-container">
+          {question?.possibleAnswers.map((choice) => (
+            <Choice text={choice.text} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 
