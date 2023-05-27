@@ -28,7 +28,13 @@ html {
 
   .droppable-area {
     width: 15rem;
-    border: 0.5px solid grey;
+    border: 0.5px solid blue;
+    font-size: 1.5rem;
+    height: 5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .question {
@@ -49,10 +55,14 @@ html {
     .choice {
       border: 2px solid blue;
       width: 15rem;
+      height: 5rem;
       list-style-type: none;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       text-align: center;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
